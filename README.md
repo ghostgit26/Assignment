@@ -38,8 +38,8 @@ my-app/
 
 1. Clone this repository:
 
-   git clone https://github.com/ghostgit26/Assignment.git
-   cd Assignment
+- git clone https://github.com/ghostgit26/Assignment.git
+- cd Assignment
 
 2. Install dependencies:
 
