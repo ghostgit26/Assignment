@@ -38,8 +38,8 @@ my-app/
 
 1. Clone this repository:
 
-   git clone https://github.com/your-username/rewards-app.git  
-   cd rewards-app
+   git clone https://github.com/ghostgit26/Assignment.git
+   cd Assignment
 
 2. Install dependencies:
 
@@ -47,7 +47,7 @@ my-app/
 
 3. Start JSON server (mock API):
 
-   npx json-server --watch db.json --port 5000
+npm run json-server
 
 4. Start React app:
 
