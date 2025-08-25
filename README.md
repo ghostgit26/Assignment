@@ -1,70 +1,113 @@
-# Getting Started with Create React App
+# Rewards Program App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple React application that tracks customer transactions and calculates reward points. It demonstrates how to fetch and display transaction data in tables, and how to calculate monthly and total rewards for each customer.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 📂 Project Structure
 
-### `npm start`
+my-app/
+├── db.json # Mock database (JSON server)
+├── src/
+│ ├── App.js # Main app component
+│ ├── index.js # Entry point
+│ ├── components/
+│ │ ├── TransactionsTable.js # Table for transactions
+│ │ ├── RewardsTable.js # Table for rewards
+│ │ └── Loader.js # Loading spinner
+│ ├── services/
+│ │ └── api.js # API service to fetch transactions
+└── README.md
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+yaml
+Copy
+Edit
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## 🚀 Features
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Fetches transaction data from a local **JSON server**.
+- Displays transactions in a clean table.
+- Calculates reward points based on:
+  - **2 points per dollar** spent over $100.
+  - **1 point per dollar** spent between $50–100.
+- Shows monthly and total rewards per customer.
+- Includes **loading** and **error handling** states.
+- Unit tests with **React Testing Library** + **Jest**.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## ⚙️ Installation
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Clone this repository:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+git clone https://github.com/your-username/rewards-app.git
+cd rewards-app
+Install dependencies:
 
-### `npm run eject`
+bash
+Copy
+Edit
+npm install
+Start JSON server (mock API):
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+bash
+Copy
+Edit
+npx json-server --watch db.json --port 5000
+Start React app:
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+bash
+Copy
+Edit
+npm start
+The app will be available at 👉 http://localhost:3000
+The mock API will run at 👉 http://localhost:5000/transactions
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+🧪 Running Tests
+Run unit tests with:
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+bash
+Copy
+Edit
+npm test
+Tests cover:
 
-## Learn More
+Rendering the main app.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Transaction table rendering.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Rewards calculation and rendering.
 
-### Code Splitting
+🧮 Reward Points Calculation
+The reward points are calculated as follows:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+For every dollar spent over $100 → 2 points.
 
-### Analyzing the Bundle Size
+For every dollar spent between $50–100 → 1 point.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Below $50 → 0 points.
 
-### Making a Progressive Web App
+Example:
+Transaction of $120 → (50 × 1) + (20 × 2) = 90 points.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+Transaction of $75 → (25 × 1) = 25 points.
 
-### Advanced Configuration
+📸 UI Preview
+Transactions Table:
+Shows all transactions by customer.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Rewards Table:
+Displays reward points earned by each customer, monthly + total.
 
-### Deployment
+🛠️ Tech Stack
+React 18
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+Bootstrap 5 (basic styling)
 
-### `npm run build` fails to minify
+Jest + React Testing Library (unit testing)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+JSON Server (mock backend API)
+```
