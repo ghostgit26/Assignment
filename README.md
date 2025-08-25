@@ -19,10 +19,6 @@ my-app/
 │ │ └── api.js # API service to fetch transactions
 └── README.md
 
-yaml
-Copy
-Edit
-
 ---
 
 ## 🚀 Features
@@ -45,34 +41,22 @@ Edit
 ```bash
 git clone https://github.com/your-username/rewards-app.git
 cd rewards-app
+
 Install dependencies:
-
-bash
-Copy
-Edit
 npm install
+
 Start JSON server (mock API):
-
-bash
-Copy
-Edit
 npx json-server --watch db.json --port 5000
-Start React app:
 
-bash
-Copy
-Edit
+Start React app:
 npm start
 The app will be available at 👉 http://localhost:3000
 The mock API will run at 👉 http://localhost:5000/transactions
 
 🧪 Running Tests
 Run unit tests with:
-
-bash
-Copy
-Edit
 npm test
+
 Tests cover:
 
 Rendering the main app.
@@ -104,8 +88,6 @@ Displays reward points earned by each customer, monthly + total.
 
 🛠️ Tech Stack
 React 18
-
-Bootstrap 5 (basic styling)
 
 Jest + React Testing Library (unit testing)
 
