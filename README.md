@@ -6,17 +6,17 @@ This is a simple React application that tracks customer transactions and calcula
 
 ## 📂 Project Structure
 
-my-app/
-├── db.json # Mock database (JSON server)
-├── src/
-│ ├── App.js # Main app component
-│ ├── index.js # Entry point
-│ ├── components/
-│ │ ├── TransactionsTable.js # Table for transactions
-│ │ ├── RewardsTable.js # Table for rewards
-│ │ └── Loader.js # Loading spinner
-│ ├── services/
-│ │ └── api.js # API service to fetch transactions
+my-app/  
+├── db.json # Mock database (JSON server)  
+├── src/  
+│ ├── App.js # Main app component  
+│ ├── index.js # Entry point  
+│ ├── components/  
+│ │ ├── TransactionsTable.js # Table for transactions  
+│ │ ├── RewardsTable.js # Table for rewards  
+│ │ └── Loader.js # Loading spinner  
+│ ├── services/  
+│ │ └── api.js # API service to fetch transactions  
 └── README.md
 
 ---
@@ -38,58 +38,64 @@ my-app/
 
 1. Clone this repository:
 
-```bash
-git clone https://github.com/your-username/rewards-app.git
-cd rewards-app
+   git clone https://github.com/your-username/rewards-app.git  
+   cd rewards-app
 
-Install dependencies:
-npm install
+2. Install dependencies:
 
-Start JSON server (mock API):
-npx json-server --watch db.json --port 5000
+   npm install
 
-Start React app:
-npm start
-The app will be available at 👉 http://localhost:3000
-The mock API will run at 👉 http://localhost:5000/transactions
+3. Start JSON server (mock API):
 
-🧪 Running Tests
+   npx json-server --watch db.json --port 5000
+
+4. Start React app:
+
+   npm start
+
+- React app will run at 👉 http://localhost:3000
+- Mock API will run at 👉 http://localhost:5000/transactions
+
+---
+
+## 🧪 Running Tests
+
 Run unit tests with:
-npm test
 
-Tests cover:
+    npm test
 
-Rendering the main app.
+**Tests cover:**
 
-Transaction table rendering.
+- Rendering the main app.
+- Transaction table rendering.
+- Rewards calculation and rendering.
 
-Rewards calculation and rendering.
+---
 
-🧮 Reward Points Calculation
+## 🧮 Reward Points Calculation
+
 The reward points are calculated as follows:
 
-For every dollar spent over $100 → 2 points.
+- For every dollar spent **over $100** → **2 points**
+- For every dollar spent **between $50–100** → **1 point**
+- Below $50 → **0 points**
 
-For every dollar spent between $50–100 → 1 point.
+**Examples:**
 
-Below $50 → 0 points.
+    Transaction of $120 → (50 × 1) + (20 × 2) = 90 points
+    Transaction of $75  → (25 × 1) = 25 points
 
-Example:
-Transaction of $120 → (50 × 1) + (20 × 2) = 90 points.
+---
 
-Transaction of $75 → (25 × 1) = 25 points.
+## 📸 UI Preview
 
-📸 UI Preview
-Transactions Table:
-Shows all transactions by customer.
+- **Transactions Table:** Shows all transactions by customer.
+- **Rewards Table:** Displays reward points earned by each customer, monthly + total.
 
-Rewards Table:
-Displays reward points earned by each customer, monthly + total.
+---
 
-🛠️ Tech Stack
-React 18
+## 🛠️ Tech Stack
 
-Jest + React Testing Library (unit testing)
-
-JSON Server (mock backend API)
-```
+- React 18
+- Jest + React Testing Library (unit testing)
+- JSON Server (mock backend API)
