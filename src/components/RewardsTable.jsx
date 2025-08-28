@@ -16,11 +16,19 @@ function RewardsTable({ transactions }) {
       year: "numeric",
     });
     const points = calculatePoints(t.amount);
-    if (!rewards[t.customerName]) rewards[t.customerName] = {};
-    if (!rewards[t.customerName][month]) rewards[t.customerName][month] = 0;
-    rewards[t.customerName][month] += points;
-    if (!rewards[t.customerName].total) rewards[t.customerName].total = 0;
-    rewards[t.customerName].total += points;
+
+    if (!rewards[t.customerId]) {
+      rewards[t.customerId] = {
+        id: t.customerId,
+        name: t.customerName,
+        total: 0,
+      };
+    }
+
+    if (!rewards[t.customerId][month]) rewards[t.customerId][month] = 0;
+
+    rewards[t.customerId][month] += points;
+    rewards[t.customerId].total += points;
   });
 
   const months = [
@@ -38,7 +46,8 @@ function RewardsTable({ transactions }) {
     <table className="table table-striped">
       <thead>
         <tr>
-          <th>Customer</th>
+          <th>Customer ID</th>
+          <th>Customer Name</th>
           {months.map((m) => (
             <th key={m}>{m}</th>
           ))}
@@ -46,9 +55,10 @@ function RewardsTable({ transactions }) {
         </tr>
       </thead>
       <tbody>
-        {Object.entries(rewards).map(([name, data]) => (
-          <tr key={name}>
-            <td>{name}</td>
+        {Object.values(rewards).map((data) => (
+          <tr key={data.id}>
+            <td>{data.id}</td>
+            <td>{data.name}</td>
             {months.map((m) => (
               <td key={m}>{data[m] || 0}</td>
             ))}
