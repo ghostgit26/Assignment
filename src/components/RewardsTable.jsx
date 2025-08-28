@@ -1,73 +1,106 @@
+// src/components/RewardsTable.js
 import React from "react";
 
 function calculatePoints(amount) {
   let points = 0;
-  if (amount > 100) points += (amount - 100) * 2 + 50;
-  else if (amount > 50) points += amount - 50;
+  if (amount > 100) {
+    points += (amount - 100) * 2 + 50;
+  } else if (amount > 50) {
+    points += amount - 50;
+  }
   return points;
 }
 
-function RewardsTable({ transactions }) {
-  const rewards = {};
+function groupRewards(transactions) {
+  const monthlyRewards = [];
+  const totalRewards = {};
 
-  transactions.forEach((t) => {
-    const month = new Date(t.date).toLocaleString("default", {
-      month: "long",
-      year: "numeric",
+  transactions.forEach((txn) => {
+    const dateObj = new Date(txn.date);
+    const month = dateObj.toLocaleString("default", { month: "short" });
+    const year = dateObj.getFullYear();
+    const points = calculatePoints(txn.amount);
+
+    // Monthly entry
+    monthlyRewards.push({
+      customerId: txn.customerId,
+      customerName: txn.customerName,
+      month,
+      year,
+      points,
     });
-    const points = calculatePoints(t.amount);
 
-    if (!rewards[t.customerId]) {
-      rewards[t.customerId] = {
-        id: t.customerId,
-        name: t.customerName,
-        total: 0,
+    // Total
+    if (!totalRewards[txn.customerId]) {
+      totalRewards[txn.customerId] = {
+        customerId: txn.customerId,
+        customerName: txn.customerName,
+        points: 0,
       };
     }
-
-    if (!rewards[t.customerId][month]) rewards[t.customerId][month] = 0;
-
-    rewards[t.customerId][month] += points;
-    rewards[t.customerId].total += points;
+    totalRewards[txn.customerId].points += points;
   });
 
-  const months = [
-    ...new Set(
-      transactions.map((t) =>
-        new Date(t.date).toLocaleString("default", {
-          month: "long",
-          year: "numeric",
-        })
-      )
-    ),
-  ];
+  return {
+    monthlyRewards,
+    totalRewards: Object.values(totalRewards),
+  };
+}
+
+const RewardsTable = ({ transactions }) => {
+  const { monthlyRewards, totalRewards } = groupRewards(transactions);
 
   return (
-    <table className="table table-striped">
-      <thead>
-        <tr>
-          <th>Customer ID</th>
-          <th>Customer Name</th>
-          {months.map((m) => (
-            <th key={m}>{m}</th>
-          ))}
-          <th>Total</th>
-        </tr>
-      </thead>
-      <tbody>
-        {Object.values(rewards).map((data) => (
-          <tr key={data.id}>
-            <td>{data.id}</td>
-            <td>{data.name}</td>
-            {months.map((m) => (
-              <td key={m}>{data[m] || 0}</td>
+    <div className="mt-4">
+      <h4>User Monthly Rewards</h4>
+      <div className="table-responsive mb-5">
+        <table className="table table-striped table-bordered">
+          <thead className="table-dark">
+            <tr>
+              <th>Customer ID</th>
+              <th>Customer Name</th>
+              <th>Month</th>
+              <th>Year</th>
+              <th>Reward Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {monthlyRewards.map((row, idx) => (
+              <tr key={idx}>
+                <td>{row.customerId}</td>
+                <td>{row.customerName}</td>
+                <td>{row.month}</td>
+                <td>{row.year}</td>
+                <td>{row.points}</td>
+              </tr>
             ))}
-            <td>{data.total}</td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>Total Rewards</h4>
+      <div className="table-responsive">
+        <table className="table table-striped table-bordered">
+          <thead className="table-dark">
+            <tr>
+              <th>Customer ID</th>
+              <th>Customer Name</th>
+              <th>Total Reward Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            {totalRewards.map((row, idx) => (
+              <tr key={idx}>
+                <td>{row.customerId}</td>
+                <td>{row.customerName}</td>
+                <td>{row.points}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
-}
+};
 
 export default RewardsTable;

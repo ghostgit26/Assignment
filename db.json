@@ -4,6 +4,7 @@
       "transactionId": 1,
       "customerId": "C001",
       "customerName": "Peter Parker",
+      "product": "Milk",
       "amount": 120,
       "date": "2023-01-15"
     },
@@ -11,6 +12,7 @@
       "transactionId": 2,
       "customerId": "C001",
       "customerName": "Peter Parker",
+      "product": "Bread",
       "amount": 75,
       "date": "2023-02-10"
     },
@@ -18,6 +20,7 @@
       "transactionId": 3,
       "customerId": "C002",
       "customerName": "Stephen Strange",
+      "product": "Olive Oil",
       "amount": 200,
       "date": "2023-02-20"
     },
@@ -25,6 +28,7 @@
       "transactionId": 4,
       "customerId": "C002",
       "customerName": "Stephen Strange",
+      "product": "Eggs",
       "amount": 50,
       "date": "2023-03-05"
     },
@@ -32,6 +36,7 @@
       "transactionId": 5,
       "customerId": "C003",
       "customerName": "Tony Stark",
+      "product": "Shampoo",
       "amount": 130,
       "date": "2023-03-25"
     },
@@ -39,6 +44,7 @@
       "transactionId": 6,
       "customerId": "C004",
       "customerName": "Natasha Romanoff",
+      "product": "Cereal",
       "amount": 90,
       "date": "2023-01-12"
     },
@@ -46,6 +52,7 @@
       "transactionId": 7,
       "customerId": "C004",
       "customerName": "Natasha Romanoff",
+      "product": "Coffee",
       "amount": 210,
       "date": "2023-02-28"
     },
@@ -53,6 +60,7 @@
       "transactionId": 8,
       "customerId": "C005",
       "customerName": "Bruce Banner",
+      "product": "Apples",
       "amount": 60,
       "date": "2023-01-20"
     },
@@ -60,6 +68,7 @@
       "transactionId": 9,
       "customerId": "C005",
       "customerName": "Bruce Banner",
+      "product": "Chicken",
       "amount": 180,
       "date": "2023-03-10"
     },
@@ -67,6 +76,7 @@
       "transactionId": 10,
       "customerId": "C006",
       "customerName": "Steve Rogers",
+      "product": "Rice",
       "amount": 150,
       "date": "2023-02-15"
     },
@@ -74,6 +84,7 @@
       "transactionId": 11,
       "customerId": "C006",
       "customerName": "Steve Rogers",
+      "product": "Soap",
       "amount": 95,
       "date": "2023-03-22"
     },
@@ -81,6 +92,7 @@
       "transactionId": 12,
       "customerId": "C007",
       "customerName": "Wanda Maximoff",
+      "product": "Toothpaste",
       "amount": 220,
       "date": "2023-01-18"
     },
@@ -88,6 +100,7 @@
       "transactionId": 13,
       "customerId": "C007",
       "customerName": "Wanda Maximoff",
+      "product": "Juice",
       "amount": 80,
       "date": "2023-02-05"
     },
@@ -95,6 +108,7 @@
       "transactionId": 14,
       "customerId": "C008",
       "customerName": "Clint Barton",
+      "product": "Biscuits",
       "amount": 70,
       "date": "2023-01-25"
     },
@@ -102,6 +116,7 @@
       "transactionId": 15,
       "customerId": "C008",
       "customerName": "Clint Barton",
+      "product": "Cheese",
       "amount": 140,
       "date": "2023-03-17"
     },
@@ -109,6 +124,7 @@
       "transactionId": 16,
       "customerId": "C009",
       "customerName": "Scott Lang",
+      "product": "Butter",
       "amount": 110,
       "date": "2023-02-08"
     },
@@ -116,6 +132,7 @@
       "transactionId": 17,
       "customerId": "C009",
       "customerName": "Scott Lang",
+      "product": "Tomatoes",
       "amount": 55,
       "date": "2023-03-12"
     },
@@ -123,6 +140,7 @@
       "transactionId": 18,
       "customerId": "C010",
       "customerName": "Wade Wilson",
+      "product": "Steak",
       "amount": 250,
       "date": "2023-01-30"
     },
@@ -130,6 +148,7 @@
       "transactionId": 19,
       "customerId": "C010",
       "customerName": "Wade Wilson",
+      "product": "Soda",
       "amount": 95,
       "date": "2023-02-18"
     },
@@ -137,6 +156,7 @@
       "transactionId": 20,
       "customerId": "C010",
       "customerName": "Wade Wilson",
+      "product": "Ice Cream",
       "amount": 180,
       "date": "2023-03-28"
     }
