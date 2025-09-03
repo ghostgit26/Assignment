@@ -3,9 +3,14 @@
  */
 export async function fetchTransactions() {
   try {
-    const res = await fetch(
-      "https://68b73ee873b3ec66cec42e96.mockapi.io/transactions/transactions"
-    );
+    //mock api with data
+    // const res = await fetch(
+    //   "https://68b73ee873b3ec66cec42e96.mockapi.io/transactions/transactions"
+    // );
+
+    //fetching from db.json
+    const res = await fetch("http://localhost:5000/transactions");
+    
     if (!res.ok) throw new Error("Failed to fetch transactions");
     return await res.json();
   } catch (error) {
