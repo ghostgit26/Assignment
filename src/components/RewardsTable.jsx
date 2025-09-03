@@ -1,16 +1,11 @@
-// src/components/RewardsTable.js
+// RewardsTable.js
 import React from "react";
+import DataTable from "./DataTable";
+import { calculatePoints } from "../utils/rewards";
 
-function calculatePoints(amount) {
-  let points = 0;
-  if (amount > 100) {
-    points += (amount - 100) * 2 + 50;
-  } else if (amount > 50) {
-    points += amount - 50;
-  }
-  return points;
-}
-
+/**
+ * Group rewards data by monthly & total
+ */
 function groupRewards(transactions) {
   const monthlyRewards = [];
   const totalRewards = {};
@@ -21,7 +16,6 @@ function groupRewards(transactions) {
     const year = dateObj.getFullYear();
     const points = calculatePoints(txn.amount);
 
-    // Monthly entry
     monthlyRewards.push({
       customerId: txn.customerId,
       customerName: txn.customerName,
@@ -30,7 +24,6 @@ function groupRewards(transactions) {
       points,
     });
 
-    // Total
     if (!totalRewards[txn.customerId]) {
       totalRewards[txn.customerId] = {
         customerId: txn.customerId,
@@ -47,58 +40,33 @@ function groupRewards(transactions) {
   };
 }
 
+/**
+ * RewardsTable shows Monthly & Total rewards
+ */
 const RewardsTable = ({ transactions }) => {
   const { monthlyRewards, totalRewards } = groupRewards(transactions);
+
+  const monthlyColumns = [
+    { key: "customerId", label: "Customer ID" },
+    { key: "customerName", label: "Customer Name" },
+    { key: "month", label: "Month" },
+    { key: "year", label: "Year" },
+    { key: "points", label: "Reward Points" },
+  ];
+
+  const totalColumns = [
+    { key: "customerId", label: "Customer ID" },
+    { key: "customerName", label: "Customer Name" },
+    { key: "points", label: "Total Reward Points" },
+  ];
 
   return (
     <div className="mt-4">
       <h4>User Monthly Rewards</h4>
-      <div className="table-responsive mb-5">
-        <table className="table table-striped table-bordered">
-          <thead className="table-dark">
-            <tr>
-              <th>Customer ID</th>
-              <th>Customer Name</th>
-              <th>Month</th>
-              <th>Year</th>
-              <th>Reward Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {monthlyRewards.map((row, idx) => (
-              <tr key={idx}>
-                <td>{row.customerId}</td>
-                <td>{row.customerName}</td>
-                <td>{row.month}</td>
-                <td>{row.year}</td>
-                <td>{row.points}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <DataTable columns={monthlyColumns} data={monthlyRewards} />
 
-      <h4>Total Rewards</h4>
-      <div className="table-responsive">
-        <table className="table table-striped table-bordered">
-          <thead className="table-dark">
-            <tr>
-              <th>Customer ID</th>
-              <th>Customer Name</th>
-              <th>Total Reward Points</th>
-            </tr>
-          </thead>
-          <tbody>
-            {totalRewards.map((row, idx) => (
-              <tr key={idx}>
-                <td>{row.customerId}</td>
-                <td>{row.customerName}</td>
-                <td>{row.points}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <h4 className="mt-5">Total Rewards</h4>
+      <DataTable columns={totalColumns} data={totalRewards} />
     </div>
   );
 };

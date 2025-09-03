@@ -1,45 +1,30 @@
-// src/components/TransactionsTable.js
-import React from "react";
+// TransactionsTable.js
+import DataTable from "./DataTable";
+import { calculatePoints } from "../utils/rewards";
 
-function calculatePoints(amount) {
-  let points = 0;
-  if (amount > 100) {
-    points += (amount - 100) * 2 + 50;
-  } else if (amount > 50) {
-    points += amount - 50;
-  }
-  return points;
-}
-
+/**
+ * Transactions table with rewards points
+ */
 const TransactionsTable = ({ transactions }) => {
-  return (
-    <div className="table-responsive">
-      <table className="table table-striped table-bordered">
-        <thead className="table-dark">
-          <tr>
-            <th>Transaction ID</th>
-            <th>Customer Name</th>
-            <th>Purchase Date</th>
-            <th>Product Purchased</th>
-            <th>Price ($)</th>
-            <th>Reward Points</th>
-          </tr>
-        </thead>
-        <tbody>
-          {transactions.map((txn) => (
-            <tr key={txn.transactionId}>
-              <td>{txn.transactionId}</td>
-              <td>{txn.customerName}</td>
-              <td>{new Date(txn.date).toLocaleDateString()}</td>
-              <td>{txn.product}</td>
-              <td>{txn.amount}</td>
-              <td>{calculatePoints(txn.amount)}</td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
+  const transactionsWithPoints = transactions.map((txn) => ({
+    transactionId: txn.transactionId,
+    customerName: txn.customerName,
+    date: new Date(txn.date).toLocaleDateString(),
+    product: txn.product,
+    amount: txn.amount,
+    points: calculatePoints(txn.amount),
+  }));
+
+  const columns = [
+    { key: "transactionId", label: "Transaction ID" },
+    { key: "customerName", label: "Customer Name" },
+    { key: "date", label: "Purchase Date" },
+    { key: "product", label: "Product Purchased" },
+    { key: "amount", label: "Price ($)" },
+    { key: "points", label: "Reward Points" },
+  ];
+
+  return <DataTable columns={columns} data={transactionsWithPoints} />;
 };
 
 export default TransactionsTable;
