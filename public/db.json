@@ -778,6 +778,246 @@
       "product": "Tea",
       "amount": 95,
       "date": "2023-05-31"
+    },
+    {
+      "transactionId": 71,
+      "customerId": "C001",
+      "customerName": "Peter Parker",
+      "product": "Grapes",
+      "amount": 85,
+      "date": "2023-06-02"
+    },
+    {
+      "transactionId": 72,
+      "customerId": "C002",
+      "customerName": "Stephen Strange",
+      "product": "Almonds",
+      "amount": 220,
+      "date": "2023-06-04"
+    },
+    {
+      "transactionId": 73,
+      "customerId": "C003",
+      "customerName": "Tony Stark",
+      "product": "Whiskey",
+      "amount": 350,
+      "date": "2023-06-07"
+    },
+    {
+      "transactionId": 74,
+      "customerId": "C004",
+      "customerName": "Natasha Romanoff",
+      "product": "Chewing Gum",
+      "amount": 40,
+      "date": "2023-06-09"
+    },
+    {
+      "transactionId": 75,
+      "customerId": "C005",
+      "customerName": "Bruce Banner",
+      "product": "Cashews",
+      "amount": 180,
+      "date": "2023-06-12"
+    },
+    {
+      "transactionId": 76,
+      "customerId": "C006",
+      "customerName": "Steve Rogers",
+      "product": "Protein Powder",
+      "amount": 260,
+      "date": "2023-06-14"
+    },
+    {
+      "transactionId": 77,
+      "customerId": "C007",
+      "customerName": "Wanda Maximoff",
+      "product": "Lipstick",
+      "amount": 150,
+      "date": "2023-06-16"
+    },
+    {
+      "transactionId": 78,
+      "customerId": "C008",
+      "customerName": "Clint Barton",
+      "product": "Bread",
+      "amount": 75,
+      "date": "2023-06-18"
+    },
+    {
+      "transactionId": 79,
+      "customerId": "C009",
+      "customerName": "Scott Lang",
+      "product": "Cucumber",
+      "amount": 55,
+      "date": "2023-06-20"
+    },
+    {
+      "transactionId": 80,
+      "customerId": "C010",
+      "customerName": "Wade Wilson",
+      "product": "Whipped Cream",
+      "amount": 140,
+      "date": "2023-06-22"
+    },
+    {
+      "transactionId": 81,
+      "customerId": "C011",
+      "customerName": "Carol Danvers",
+      "product": "Eggs",
+      "amount": 95,
+      "date": "2023-06-25"
+    },
+    {
+      "transactionId": 82,
+      "customerId": "C012",
+      "customerName": "Sam Wilson",
+      "product": "Shampoo",
+      "amount": 130,
+      "date": "2023-06-27"
+    },
+    {
+      "transactionId": 83,
+      "customerId": "C013",
+      "customerName": "Bucky Barnes",
+      "product": "Lotion",
+      "amount": 160,
+      "date": "2023-07-01"
+    },
+    {
+      "transactionId": 84,
+      "customerId": "C014",
+      "customerName": "Nick Fury",
+      "product": "Perfume",
+      "amount": 300,
+      "date": "2023-07-03"
+    },
+    {
+      "transactionId": 85,
+      "customerId": "C015",
+      "customerName": "Shuri",
+      "product": "Face Wash",
+      "amount": 140,
+      "date": "2023-07-05"
+    },
+    {
+      "transactionId": 86,
+      "customerId": "C016",
+      "customerName": "T'Challa",
+      "product": "Wine",
+      "amount": 270,
+      "date": "2023-07-07"
+    },
+    {
+      "transactionId": 87,
+      "customerId": "C017",
+      "customerName": "Loki Laufeyson",
+      "product": "Cookies",
+      "amount": 95,
+      "date": "2023-07-09"
+    },
+    {
+      "transactionId": 88,
+      "customerId": "C018",
+      "customerName": "Thor Odinson",
+      "product": "Chicken",
+      "amount": 200,
+      "date": "2023-07-11"
+    },
+    {
+      "transactionId": 89,
+      "customerId": "C019",
+      "customerName": "Gamora",
+      "product": "Juice",
+      "amount": 100,
+      "date": "2023-07-13"
+    },
+    {
+      "transactionId": 90,
+      "customerId": "C020",
+      "customerName": "Groot",
+      "product": "Muffins",
+      "amount": 120,
+      "date": "2023-07-15"
+    },
+    {
+      "transactionId": 91,
+      "customerId": "C021",
+      "customerName": "Rocket Raccoon",
+      "product": "Energy Drink",
+      "amount": 150,
+      "date": "2023-07-17"
+    },
+    {
+      "transactionId": 92,
+      "customerId": "C022",
+      "customerName": "Drax",
+      "product": "Pineapple",
+      "amount": 95,
+      "date": "2023-07-19"
+    },
+    {
+      "transactionId": 93,
+      "customerId": "C023",
+      "customerName": "Nebula",
+      "product": "Cabbage",
+      "amount": 65,
+      "date": "2023-07-21"
+    },
+    {
+      "transactionId": 94,
+      "customerId": "C024",
+      "customerName": "Vision",
+      "product": "Toothpaste",
+      "amount": 115,
+      "date": "2023-07-23"
+    },
+    {
+      "transactionId": 95,
+      "customerId": "C025",
+      "customerName": "Okoye",
+      "product": "Tomatoes",
+      "amount": 70,
+      "date": "2023-07-25"
+    },
+    {
+      "transactionId": 96,
+      "customerId": "C026",
+      "customerName": "Happy Hogan",
+      "product": "Pizza",
+      "amount": 160,
+      "date": "2023-07-27"
+    },
+    {
+      "transactionId": 97,
+      "customerId": "C026",
+      "customerName": "Happy Hogan",
+      "product": "Beer",
+      "amount": 220,
+      "date": "2023-07-29"
+    },
+    {
+      "transactionId": 98,
+      "customerId": "C027",
+      "customerName": "Pepper Potts",
+      "product": "Juice",
+      "amount": 100,
+      "date": "2023-08-01"
+    },
+    {
+      "transactionId": 99,
+      "customerId": "C027",
+      "customerName": "Pepper Potts",
+      "product": "Milk",
+      "amount": 125,
+      "date": "2023-08-03"
+    },
+    {
+      "transactionId": 100,
+      "customerId": "C028",
+      "customerName": "Maria Hill",
+      "product": "Biscuits",
+      "amount": 90,
+      "date": "2023-08-05"
     }
   ]
 }
