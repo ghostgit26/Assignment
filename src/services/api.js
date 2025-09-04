@@ -1,7 +1,10 @@
 /**
  * API calls for transactions
  */
+
+import { logRequest, logError, logResponse } from "./logger";
 export async function fetchTransactions() {
+  const url = "/db.json";
   try {
     //mock api with data
     // const res = await fetch(
@@ -9,12 +12,15 @@ export async function fetchTransactions() {
     // );
 
     //fetching from db.json
-    const res = await fetch("http://localhost:5000/transactions");
-    
+    logRequest(url);
+    const res = await fetch(url);
+
     if (!res.ok) throw new Error("Failed to fetch transactions");
-    return await res.json();
+    const data = await res.json();
+    logResponse(url, data);
+    return data.transactions;
   } catch (error) {
-    console.error("API Error:", error);
+    logError(url, error);
     throw error;
   }
 }
