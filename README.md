@@ -116,7 +116,19 @@ The reward points are calculated as follows:
 
 ---
 
-## 🛠️ Tech Stack
+## � Project Screenshots
+
+### Transactions Table
+
+![Transactions Table](<public/images/table1%20(1).png>)
+
+### Rewards Table
+
+![Rewards Table](<public/images/table2%20(2).png>)
+
+---
+
+## �🛠️ Tech Stack
 
 - React 18
 - Jest + React Testing Library (unit testing)
