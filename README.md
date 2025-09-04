@@ -83,7 +83,7 @@ Run tests with coverage report:
 
 Our project maintains comprehensive test coverage across all components:
 
-![Test Coverage Report](docs/images/coverage-report.png)
+![Test Coverage Report](public/images/coverage-report.png)
 
 **Current Coverage Summary:**
 
