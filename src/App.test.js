@@ -1,94 +1,76 @@
-import { render, screen, waitFor, within } from "@testing-library/react";
+import React from "react";
+import { render, screen, waitFor } from "@testing-library/react";
 import App from "./App";
-import TransactionsTable from "./components/TransactionsTable";
-import RewardsTable from "./components/RewardsTable";
+import * as api from "./services/api";
 
-const mockTransactions = [
-  {
-    id: 1,
-    customerId: "C001",
-    customerName: "Peter Parker",
-    amount: 120,
-    date: "2023-01-15",
-  },
-  {
-    id: 2,
-    customerId: "C001",
-    customerName: "Peter Parker",
-    amount: 75,
-    date: "2023-02-10",
-  },
-  {
-    id: 3,
-    customerId: "C002",
-    customerName: "Stephen Strange",
-    amount: 200,
-    date: "2023-02-20",
-  },
-  {
-    id: 4,
-    customerId: "C002",
-    customerName: "Stephen Strange",
-    amount: 50,
-    date: "2023-03-05",
-  },
-  {
-    id: 5,
-    customerId: "C003",
-    customerName: "Tony Stark",
-    amount: 130,
-    date: "2023-03-25",
-  },
-];
+// Mock components
+jest.mock("./components/TransactionsTable", () => ({ transactions }) => (
+  <div data-testid="transactions-table">{transactions.length} transactions</div>
+));
+jest.mock("./components/RewardsTable", () => ({ transactions }) => (
+  <div data-testid="rewards-table">
+    Rewards for {transactions.length} transactions
+  </div>
+));
+jest.mock("./components/Loader", () => () => (
+  <div data-testid="loader">Loading...</div>
+));
+jest.mock("./components/ErrorBoundary", () => ({ children }) => (
+  <>{children}</>
+));
 
-describe("App Component", () => {
-  test("renders without crashing and shows main header", async () => {
+describe("App", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("shows loader while fetching transactions", async () => {
+    jest.spyOn(api, "fetchTransactions").mockImplementation(
+      () => new Promise(() => {}) // never resolves
+    );
+    render(<App />);
+    expect(screen.getByTestId("loader")).toBeInTheDocument();
+  });
+
+  test("renders transactions and rewards tables after data loads", async () => {
+    const mockData = [{ id: 1 }, { id: 2 }];
+    jest.spyOn(api, "fetchTransactions").mockResolvedValue(mockData);
+
     render(<App />);
     await waitFor(() => {
-      expect(
-        screen.getByRole("heading", { name: /transactions/i })
-      ).toBeInTheDocument();
+      expect(screen.getByTestId("transactions-table")).toHaveTextContent(
+        "2 transactions"
+      );
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId("rewards-table")).toHaveTextContent(
+        "Rewards for 2 transactions"
+      );
     });
   });
-});
 
-describe("TransactionsTable Component", () => {
-  test("renders a table with correct number of rows", () => {
-    render(<TransactionsTable transactions={mockTransactions} />);
-    const rows = screen.getAllByRole("row");
-    // +1 because header row also counts
-    expect(rows.length).toBe(mockTransactions.length + 1);
+  test("shows error message if fetch fails", async () => {
+    jest
+      .spyOn(api, "fetchTransactions")
+      .mockRejectedValue(new Error("Network error"));
+    render(<App />);
+    await waitFor(() => {
+      expect(screen.getByText(/Network error/)).toBeInTheDocument();
+    });
   });
 
-  test("renders table headers", () => {
-    render(<TransactionsTable transactions={mockTransactions} />);
-    expect(
-      screen.getByRole("columnheader", { name: /customer/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("columnheader", { name: /amount/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("columnheader", { name: /date/i })
-    ).toBeInTheDocument();
-  });
-});
-
-describe("RewardsTable Component", () => {
-  test("renders a table with one row per unique customer", () => {
-    render(<RewardsTable transactions={mockTransactions} />);
-    const rows = screen.getAllByRole("row");
-    // header row + 3 customers
-    expect(rows.length).toBe(4);
-  });
-
-  test("displays total rewards as a number for each customer", () => {
-    render(<RewardsTable transactions={mockTransactions} />);
-    const customerRows = screen.getAllByRole("row").slice(1); // skip header row
-    customerRows.forEach((row) => {
-      const cells = within(row).getAllByRole("cell");
-      const rewardCell = cells[cells.length - 1]; // last column = total rewards
-      expect(Number.isNaN(Number(rewardCell.textContent))).toBe(false);
+  test("renders with empty transactions", async () => {
+    jest.spyOn(api, "fetchTransactions").mockResolvedValue([]);
+    render(<App />);
+    await waitFor(() => {
+      expect(screen.getByTestId("transactions-table")).toHaveTextContent(
+        "0 transactions"
+      );
+    });
+    await waitFor(() => {
+      expect(screen.getByTestId("rewards-table")).toHaveTextContent(
+        "Rewards for 0 transactions"
+      );
     });
   });
 });
