@@ -50,7 +50,6 @@ my-app/
    npm start
 
 - React app will run at 👉 http://localhost:3000
-- Mock API will run at 👉 http://localhost:5000/transactions
 
 ---
 
