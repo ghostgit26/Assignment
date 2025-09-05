@@ -58,8 +58,20 @@ const DataTable = ({ data = [], columns = [] }) => {
       {/* Table */}
       <div className="table-responsive">
         <table className="table table-bordered table-hover">
-          <TableHeader columns={columns} />
-          <TableBody data={paginatedData} columns={columns} />
+          <TableHeader
+            columns={columns}
+            sortKey={sortKey}
+            sortOrder={order}
+            onSort={(key) => {
+              if (sortKey === key) {
+                setOrder(order === "asc" ? "desc" : "asc");
+              } else {
+                setSortKey(key);
+                setOrder("asc");
+              }
+            }}
+          />
+          <TableBody data={paginatedData} columns={columns} search={search} />
         </table>
       </div>
 
