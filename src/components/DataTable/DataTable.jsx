@@ -2,14 +2,14 @@ import React, { useState, useMemo } from "react";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import SearchBar from "./SearchBar";
-import SortDropdown from "./SortDropdown";
+import DateFilter from "./DateFilter";
 import PaginationControls from "./PaginationControls";
 import RowsPerPageSelector from "./RowsPerPageSelector";
 import PaginationInfo from "./PaginationInfo";
-import { filterData, sortData, paginateData } from "./utils";
+import { filterData, sortData, paginateData, filterDataByDate } from "./utils";
 
 /**
- * DataTable component provides a generic, reusable table with search, sorting, and pagination.
+ * DataTable component provides a generic, reusable table with search, date filtering, and pagination.
  *
  * @component
  * @param {Object} props - Component properties.
@@ -18,18 +18,58 @@ import { filterData, sortData, paginateData } from "./utils";
  * @returns {JSX.Element} Rendered DataTable component.
  */
 const DataTable = ({ data = [], columns = [] }) => {
+  // Calculate default date range: 90 days ago to today
+  const getDefaultDateRange = () => {
+    const today = new Date();
+    const ninetyDaysAgo = new Date();
+    ninetyDaysAgo.setDate(today.getDate() - 90);
+
+    return {
+      startDate: ninetyDaysAgo.toISOString().split("T")[0], // YYYY-MM-DD format
+      endDate: today.toISOString().split("T")[0], // YYYY-MM-DD format
+    };
+  };
+
+  const defaultDates = getDefaultDateRange();
+
   const [search, setSearch] = useState("");
   const [sortKey, setSortKey] = useState("");
   const [order, setOrder] = useState("asc");
   const [page, setPage] = useState(1);
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [fromDate, setFromDate] = useState(defaultDates.startDate);
+  const [toDate, setToDate] = useState(defaultDates.endDate);
+  const [appliedFromDate, setAppliedFromDate] = useState("");
+  const [appliedToDate, setAppliedToDate] = useState("");
 
-  /** Processed data (filter + sort) */
+  /** Handle date filter search */
+  const handleDateSearch = () => {
+    setAppliedFromDate(fromDate);
+    setAppliedToDate(toDate);
+    setPage(1); // Reset to first page when applying new filter
+  };
+
+  /** Handle date filter reset */
+  const handleDateReset = () => {
+    const defaultDates = getDefaultDateRange();
+    setFromDate(defaultDates.startDate);
+    setToDate(defaultDates.endDate);
+    setAppliedFromDate(defaultDates.startDate);
+    setAppliedToDate(defaultDates.endDate);
+    setPage(1); // Reset to first page when resetting filter
+  };
+
+  /** Processed data (filter by search + date + sort) */
   const processedData = useMemo(() => {
     let filtered = filterData(data, search);
-    let sorted = sortData(filtered, sortKey, order);
+    let dateFiltered = filterDataByDate(
+      filtered,
+      appliedFromDate,
+      appliedToDate
+    );
+    let sorted = sortData(dateFiltered, sortKey, order);
     return sorted;
-  }, [data, search, sortKey, order]);
+  }, [data, search, appliedFromDate, appliedToDate, sortKey, order]);
 
   /** Paginated data */
   const paginatedData = useMemo(
@@ -42,16 +82,18 @@ const DataTable = ({ data = [], columns = [] }) => {
 
   return (
     <div className="card p-3 shadow-sm">
-      {/* Search + Sort Controls */}
+      {/* Search + Date Filter Controls */}
       <div className="d-flex justify-content-between align-items-center mb-3">
-        <SearchBar value={search} onChange={setSearch} />
-        <SortDropdown
-          columns={columns}
-          value={{ key: sortKey, order }}
-          onChange={({ key, order }) => {
-            setSortKey(key);
-            setOrder(order);
-          }}
+        <div style={{ marginRight: "20px" }}>
+          <SearchBar value={search} onChange={setSearch} />
+        </div>
+        <DateFilter
+          fromDate={fromDate}
+          toDate={toDate}
+          onFromDateChange={setFromDate}
+          onToDateChange={setToDate}
+          onSearchClick={handleDateSearch}
+          onResetClick={handleDateReset}
         />
       </div>
 

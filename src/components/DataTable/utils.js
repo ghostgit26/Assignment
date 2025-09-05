@@ -47,3 +47,52 @@ export const paginateData = (data = [], page = 1, rowsPerPage = 5) => {
   const endIndex = startIndex + rowsPerPage;
   return data.slice(startIndex, endIndex);
 };
+
+/**
+ * Filters data by date range.
+ * @param {Array<object>} data - The dataset to filter.
+ * @param {string} fromDate - Start date (YYYY-MM-DD format).
+ * @param {string} toDate - End date (YYYY-MM-DD format).
+ * @param {string} dateField - The field name containing date values.
+ * @returns {Array<object>} Date-filtered dataset.
+ */
+export const filterDataByDate = (
+  data = [],
+  fromDate = "",
+  toDate = "",
+  dateField = "date"
+) => {
+  if (!Array.isArray(data)) return [];
+  if (!fromDate && !toDate) return data;
+
+  return data.filter((item) => {
+    const itemDate = item[dateField];
+    if (!itemDate) return true;
+
+    // Handle different date formats and ensure valid date parsing
+    let normalizedDate;
+    try {
+      // If itemDate is already in YYYY-MM-DD format, use it directly
+      if (
+        typeof itemDate === "string" &&
+        /^\d{4}-\d{2}-\d{2}$/.test(itemDate)
+      ) {
+        normalizedDate = itemDate;
+      } else {
+        // Parse other date formats and convert to YYYY-MM-DD
+        const dateObj = new Date(itemDate);
+        if (isNaN(dateObj.getTime())) {
+          return true; // Skip invalid dates
+        }
+        normalizedDate = dateObj.toISOString().split("T")[0];
+      }
+    } catch (error) {
+      return true; // Skip items with unparseable dates
+    }
+
+    if (fromDate && normalizedDate < fromDate) return false;
+    if (toDate && normalizedDate > toDate) return false;
+
+    return true;
+  });
+};
