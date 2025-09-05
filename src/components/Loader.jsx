@@ -1,6 +1,13 @@
 import React from "react";
 
 /**
+ * Loader component displays a spinner while data is being fetched.
+ *
+ * @component
+ * @returns {JSX.Element} Rendered Loader component.
+ */
+
+/**
  * Loader spinner shown while data is fetching
  */
 function Loader() {

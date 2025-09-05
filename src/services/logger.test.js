@@ -1,3 +1,6 @@
+/**
+ * Unit tests for the logger utility functions.
+ */
 import { logRequest, logResponse, logError } from "./logger";
 
 // Mock console methods

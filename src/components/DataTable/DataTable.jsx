@@ -9,12 +9,13 @@ import PaginationInfo from "./PaginationInfo";
 import { filterData, sortData, paginateData } from "./utils";
 
 /**
- * Generic reusable DataTable with search, sorting, pagination.
+ * DataTable component provides a generic, reusable table with search, sorting, and pagination.
  *
  * @component
- * @param {Object} props
- * @param {Array<object>} props.data - The dataset to display.
- * @param {Array<{key:string,label:string}>} props.columns - Table column definitions.
+ * @param {Object} props - Component properties.
+ * @param {Array<Object>} props.data - The dataset to display.
+ * @param {Array<{key: string, label: string}>} props.columns - Table column definitions.
+ * @returns {JSX.Element} Rendered DataTable component.
  */
 const DataTable = ({ data = [], columns = [] }) => {
   const [search, setSearch] = useState("");

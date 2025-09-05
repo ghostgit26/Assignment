@@ -77,7 +77,12 @@ TotalRewardsSection.propTypes = {
 };
 
 /**
- * RewardsTable shows Monthly & Total rewards
+ * RewardsTable component displays monthly and total rewards for customers.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {Array<Object>} props.transactions - List of transactions to calculate rewards from.
+ * @returns {JSX.Element} Rendered RewardsTable component.
  */
 const RewardsTable = ({ transactions }) => {
   const { monthlyRewards, totalRewards } = useMemo(

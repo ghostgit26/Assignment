@@ -1,6 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
+/**
+ * TableBody component renders the body rows of a table.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {Array<{key: string}>} props.columns - List of column definitions.
+ * @param {Array<Object>} props.data - The dataset to display in the table.
+ * @param {string} props.search - The current search query.
+ * @returns {JSX.Element} Rendered TableBody component.
+ */
 const TableBody = ({ columns, data, search }) => (
   <tbody>
     {data.length > 0 ? (

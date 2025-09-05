@@ -1,6 +1,10 @@
 import { fetchTransactions } from "./api";
 import * as logger from "./logger";
 
+/**
+ * Unit tests for the API service functions.
+ */
+
 // Mock the logger module
 jest.mock("./logger", () => ({
   logRequest: jest.fn(),

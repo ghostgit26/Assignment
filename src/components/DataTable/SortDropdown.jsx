@@ -2,6 +2,17 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
+ * SortDropdown component provides a dropdown for sorting table data.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {Array<{key: string, label: string}>} props.columns - List of column definitions.
+ * @param {Object} props.value - The current sort state.
+ * @param {Function} props.onChange - Callback function to handle sort changes.
+ * @returns {JSX.Element} Rendered SortDropdown component.
+ */
+
+/**
  * Dropdown for sorting table data.
  */
 const SortDropdown = ({ columns = [], value, onChange }) => {

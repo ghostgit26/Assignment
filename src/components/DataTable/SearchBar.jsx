@@ -1,12 +1,13 @@
 import React from "react";
 
 /**
- * Search input for filtering table data.
+ * SearchBar component provides an input field for filtering table data.
  *
  * @component
- * @param {Object} props
- * @param {string} props.value - Current search value.
- * @param {(value: string) => void} props.onChange - Callback when input changes.
+ * @param {Object} props - Component properties.
+ * @param {string} props.value - The current search value.
+ * @param {Function} props.onChange - Callback function to handle input changes.
+ * @returns {JSX.Element} Rendered SearchBar component.
  */
 const SearchBar = ({ value = "", onChange = () => {} }) => {
   const handleChange = (e) => {

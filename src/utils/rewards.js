@@ -3,9 +3,11 @@
  */
 
 /**
- * Calculate reward points for a given purchase amount
- * @param {number} amount - Purchase amount
- * @returns {number} Reward points
+ * Calculate reward points for a given purchase amount.
+ *
+ * @function calculatePoints
+ * @param {number} amount - The purchase amount.
+ * @returns {number} The calculated reward points.
  */
 export function calculatePoints(amount) {
   if (isNaN(amount) || amount <= 0) return 0;

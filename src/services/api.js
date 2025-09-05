@@ -3,6 +3,15 @@
  */
 
 import { logRequest, logError, logResponse } from "./logger";
+
+/**
+ * Fetch transactions from the API.
+ *
+ * @async
+ * @function fetchTransactions
+ * @returns {Promise<Object[]>} A promise that resolves to an array of transaction objects.
+ * @throws Will throw an error if the fetch operation fails.
+ */
 export async function fetchTransactions() {
   const url = "/db.json";
   try {

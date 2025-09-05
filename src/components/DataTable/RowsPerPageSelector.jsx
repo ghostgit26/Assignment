@@ -2,6 +2,16 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
+ * RowsPerPageSelector component allows users to select the number of rows displayed per page.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {number} props.value - The current rows per page value.
+ * @param {Function} props.onChange - Callback function to handle changes in rows per page.
+ * @returns {JSX.Element} Rendered RowsPerPageSelector component.
+ */
+
+/**
  * Selector to choose rows per page.
  */
 const RowsPerPageSelector = ({ value, onChange }) => (

@@ -1,7 +1,10 @@
 import React from "react";
 
 /**
- * Error Boundary component to catch UI errors
+ * Error Boundary component to catch and handle UI errors gracefully.
+ *
+ * @class
+ * @extends React.Component
  */
 class ErrorBoundary extends React.Component {
   constructor(props) {

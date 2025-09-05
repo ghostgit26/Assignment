@@ -5,6 +5,12 @@ import RewardsTable from "./components/RewardsTable";
 import Loader from "./components/Loader";
 import ErrorBoundary from "./components/ErrorBoundary";
 
+/**
+ * Main application component that fetches and displays transactions and rewards.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered App component.
+ */
 function App() {
   const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);

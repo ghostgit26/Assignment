@@ -2,7 +2,14 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
- * Pagination buttons to navigate pages.
+ * PaginationControls component provides navigation buttons for paginated data.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {number} props.page - The current page number.
+ * @param {number} props.totalPages - The total number of pages.
+ * @param {Function} props.onChange - Callback function to handle page changes.
+ * @returns {JSX.Element} Rendered PaginationControls component.
  */
 const PaginationControls = ({ page, totalPages, onChange }) => (
   <div className="d-flex align-items-center gap-2">

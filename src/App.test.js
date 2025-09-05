@@ -19,6 +19,9 @@ jest.mock("./components/ErrorBoundary", () => ({ children }) => (
   <>{children}</>
 ));
 
+/**
+ * Unit tests for the App component.
+ */
 describe("App", () => {
   afterEach(() => {
     jest.clearAllMocks();

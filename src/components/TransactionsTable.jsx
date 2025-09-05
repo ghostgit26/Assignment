@@ -26,7 +26,12 @@ const TRANSACTION_COLUMNS = [
 ];
 
 /**
- * Transactions table with rewards points
+ * TransactionsTable component displays a table of transactions with calculated reward points.
+ *
+ * @component
+ * @param {Object} props - Component properties.
+ * @param {Array<Object>} props.transactions - List of transactions to display.
+ * @returns {JSX.Element} Rendered TransactionsTable component.
  */
 const TransactionsTable = ({ transactions }) => {
   const transactionsWithPoints = useMemo(
