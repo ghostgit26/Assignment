@@ -45,11 +45,7 @@ my-app/
 
    npm install
 
-3. Start JSON server (mock API):
-
-npm run json-server
-
-4. Start React app:
+3. Start React app:
 
    npm start
 
