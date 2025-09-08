@@ -1018,6 +1018,14 @@
       "product": "Biscuits",
       "amount": 90,
       "date": "2023-08-05"
+    },
+    {
+      "transactionId": 101,
+      "customerId": "C029",
+      "customerName": "Pradyumna Das",
+      "product": "Smartphone",
+      "amount": 25000,
+      "date": "2024-08-05"
     }
   ]
 }
