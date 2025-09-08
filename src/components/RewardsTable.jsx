@@ -5,35 +5,60 @@ import { calculatePoints } from "../utils/rewards";
 
 // Data transformation logic
 const transformRewardsData = (transactions) => {
-  const monthlyRewards = [];
+  const monthlyRewardsMap = {};
   const totalRewardsMap = {};
 
   transactions.forEach((txn) => {
     const dateObj = new Date(txn.date);
     const month = dateObj.toLocaleString("default", { month: "short" });
     const year = dateObj.getFullYear();
+    const monthYear = `${month} ${year}`;
     const points = calculatePoints(txn.amount);
 
-    monthlyRewards.push({
-      customerId: txn.customerId,
-      customerName: txn.customerName,
-      month,
-      year,
-      points,
-    });
+    // Create a unique key for customer-month-year combination
+    const monthlyKey = `${txn.customerId}-${monthYear}`;
 
+    // Aggregate monthly rewards
+    if (!monthlyRewardsMap[monthlyKey]) {
+      monthlyRewardsMap[monthlyKey] = {
+        customerId: txn.customerId,
+        customerName: txn.customerName,
+        monthYear,
+        points: 0,
+        originalDate: txn.date, // Use first transaction date for this month
+      };
+    }
+    monthlyRewardsMap[monthlyKey].points += points;
+
+    // Update to earliest date for this month (better for filtering)
+    if (
+      new Date(txn.date) < new Date(monthlyRewardsMap[monthlyKey].originalDate)
+    ) {
+      monthlyRewardsMap[monthlyKey].originalDate = txn.date;
+    }
+
+    // Aggregate total rewards
     if (!totalRewardsMap[txn.customerId]) {
       totalRewardsMap[txn.customerId] = {
         customerId: txn.customerId,
         customerName: txn.customerName,
         points: 0,
+        originalDate: txn.date, // Use the first transaction date for this customer
       };
     }
     totalRewardsMap[txn.customerId].points += points;
+
+    // Update to the latest transaction date for this customer
+    if (
+      new Date(txn.date) >
+      new Date(totalRewardsMap[txn.customerId].originalDate)
+    ) {
+      totalRewardsMap[txn.customerId].originalDate = txn.date;
+    }
   });
 
   return {
-    monthlyRewards,
+    monthlyRewards: Object.values(monthlyRewardsMap),
     totalRewards: Object.values(totalRewardsMap),
   };
 };
@@ -42,8 +67,7 @@ const transformRewardsData = (transactions) => {
 const MONTHLY_COLUMNS = [
   { key: "customerId", label: "Customer ID" },
   { key: "customerName", label: "Customer Name" },
-  { key: "month", label: "Month" },
-  { key: "year", label: "Year" },
+  { key: "monthYear", label: "Month Year" },
   { key: "points", label: "Reward Points" },
 ];
 

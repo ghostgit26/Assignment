@@ -73,10 +73,7 @@ describe("RewardsTable", () => {
 
     // Check for unique column headers that only appear in monthly table
     expect(
-      screen.getByRole("columnheader", { name: "Month" })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("columnheader", { name: "Year" })
+      screen.getByRole("columnheader", { name: "Month Year" })
     ).toBeInTheDocument();
     expect(
       screen.getByRole("columnheader", { name: "Reward Points" })
@@ -121,8 +118,7 @@ describe("RewardsTable", () => {
 
     expect(aliceElements.length).toBeGreaterThan(0);
     expect(bobElements.length).toBeGreaterThan(0);
-    expect(screen.getAllByText("Aug").length).toBeGreaterThan(0); // Month for August appears multiple times
-    expect(screen.getAllByText("2025").length).toBeGreaterThan(0); // Year appears multiple times
+    expect(screen.getAllByText("Aug 2025").length).toBeGreaterThan(0); // Month Year format appears multiple times
   });
 
   test("displays correct total data", () => {

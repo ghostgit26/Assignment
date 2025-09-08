@@ -2,13 +2,15 @@ import React, { useMemo } from "react";
 import PropTypes from "prop-types";
 import DataTable from "./DataTable/DataTable"; // ✅ updated path
 import { calculatePoints } from "../utils/rewards";
+import { formatDateToDisplay } from "./DataTable/utils";
 
 // Data transformation logic
 const transformTransactionData = (transactions) => {
   return transactions.map((txn) => ({
     transactionId: txn.transactionId,
     customerName: txn.customerName,
-    date: new Date(txn.date).toLocaleDateString(),
+    date: formatDateToDisplay(txn.date),
+    originalDate: txn.date, // Keep original date for filtering
     product: txn.product,
     amount: txn.amount,
     points: calculatePoints(txn.amount),

@@ -1,4 +1,10 @@
-import { filterData, sortData, paginateData, filterDataByDate } from "./utils";
+import {
+  filterData,
+  sortData,
+  paginateData,
+  filterDataByDate,
+  formatDateToDisplay,
+} from "./utils";
 
 describe("DataTable Utils", () => {
   const testData = [
@@ -155,6 +161,65 @@ describe("DataTable Utils", () => {
     test("handles non-array input", () => {
       const result = filterDataByDate(null, "2023-01-01", "2023-12-31");
       expect(result).toEqual([]);
+    });
+  });
+
+  describe("formatDateToDisplay", () => {
+    test("formats yyyy-mm-dd to dd-mm-yyyy", () => {
+      const result = formatDateToDisplay("2023-01-15");
+      expect(result).toBe("15-1-2023");
+    });
+
+    test("handles empty string", () => {
+      const result = formatDateToDisplay("");
+      expect(result).toBe("");
+    });
+
+    test("handles null/undefined", () => {
+      expect(formatDateToDisplay(null)).toBe("");
+      expect(formatDateToDisplay(undefined)).toBe("");
+    });
+
+    test("returns already formatted date as is", () => {
+      const result = formatDateToDisplay("15-01-2023");
+      expect(result).toBe("15-01-2023");
+    });
+
+    test("handles invalid date gracefully", () => {
+      const result = formatDateToDisplay("invalid-date");
+      expect(result).toBe("invalid-date");
+    });
+  });
+
+  describe("sortData - enhanced", () => {
+    test("sorts dates properly", () => {
+      const dateData = [
+        { id: 1, date: "15-1-2023" },
+        { id: 2, date: "10-2-2023" },
+        { id: 3, date: "5-3-2023" },
+      ];
+      const result = sortData(dateData, "date", "asc");
+      expect(result.map((item) => item.id)).toEqual([1, 2, 3]);
+    });
+
+    test("sorts month-year format properly", () => {
+      const monthYearData = [
+        { id: 1, monthYear: "Mar 2023" },
+        { id: 2, monthYear: "Jan 2023" },
+        { id: 3, monthYear: "Feb 2023" },
+      ];
+      const result = sortData(monthYearData, "monthYear", "asc");
+      expect(result.map((item) => item.id)).toEqual([2, 3, 1]);
+    });
+
+    test("sorts numeric values properly", () => {
+      const numericData = [
+        { id: 1, amount: 100 },
+        { id: 2, amount: 50 },
+        { id: 3, amount: 200 },
+      ];
+      const result = sortData(numericData, "amount", "asc");
+      expect(result.map((item) => item.amount)).toEqual([50, 100, 200]);
     });
   });
 });
