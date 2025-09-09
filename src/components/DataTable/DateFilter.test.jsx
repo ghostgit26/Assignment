@@ -8,7 +8,6 @@ describe("DateFilter", () => {
     toDate: "2023-12-31",
     onFromDateChange: jest.fn(),
     onToDateChange: jest.fn(),
-    onSearchClick: jest.fn(),
     onResetClick: jest.fn(),
   };
 
@@ -25,7 +24,6 @@ describe("DateFilter", () => {
     // Check that inputs have the provided values
     expect(screen.getByDisplayValue("2023-01-01")).toBeInTheDocument();
     expect(screen.getByDisplayValue("2023-12-31")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /search/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /reset/i })).toBeInTheDocument();
   });
 
@@ -60,15 +58,6 @@ describe("DateFilter", () => {
     expect(mockProps.onToDateChange).toHaveBeenCalledWith("2023-11-30");
   });
 
-  test("calls onSearchClick when search button is clicked", () => {
-    render(<DateFilter {...mockProps} />);
-
-    const searchButton = screen.getByRole("button", { name: /search/i });
-    fireEvent.click(searchButton);
-
-    expect(mockProps.onSearchClick).toHaveBeenCalledTimes(1);
-  });
-
   test("calls onResetClick when reset button is clicked", () => {
     render(<DateFilter {...mockProps} />);
 
@@ -83,12 +72,10 @@ describe("DateFilter", () => {
 
     const fromDateInput = screen.getByLabelText("From:");
     const toDateInput = screen.getByLabelText("To:");
-    const searchButton = screen.getByRole("button", { name: /search/i });
     const resetButton = screen.getByRole("button", { name: /reset/i });
 
     expect(fromDateInput).toHaveStyle({ minWidth: "140px" });
     expect(toDateInput).toHaveStyle({ minWidth: "140px" });
-    expect(searchButton).toHaveStyle({ minWidth: "80px" });
     expect(resetButton).toHaveStyle({ minWidth: "80px" });
   });
 });

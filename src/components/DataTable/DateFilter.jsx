@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 
 /**
- * DateFilter component provides date range filtering with from and to date inputs, search and reset buttons.
+ * DateFilter component provides date range filtering with from and to date inputs and reset button.
  *
  * @component
  * @param {Object} props - Component properties.
@@ -10,7 +10,6 @@ import PropTypes from "prop-types";
  * @param {string} props.toDate - The end date for filtering.
  * @param {Function} props.onFromDateChange - Callback function to handle from date changes.
  * @param {Function} props.onToDateChange - Callback function to handle to date changes.
- * @param {Function} props.onSearchClick - Callback function to handle search button click.
  * @param {Function} props.onResetClick - Callback function to handle reset button click.
  * @returns {JSX.Element} Rendered DateFilter component.
  */
@@ -19,7 +18,6 @@ const DateFilter = ({
   toDate,
   onFromDateChange,
   onToDateChange,
-  onSearchClick,
   onResetClick,
 }) => {
   return (
@@ -48,14 +46,6 @@ const DateFilter = ({
       />
       <button
         type="button"
-        className="btn btn-primary"
-        onClick={onSearchClick}
-        style={{ minWidth: "80px" }}
-      >
-        Search
-      </button>
-      <button
-        type="button"
         className="btn btn-secondary"
         onClick={onResetClick}
         style={{ minWidth: "80px" }}
@@ -71,7 +61,6 @@ DateFilter.propTypes = {
   toDate: PropTypes.string.isRequired,
   onFromDateChange: PropTypes.func.isRequired,
   onToDateChange: PropTypes.func.isRequired,
-  onSearchClick: PropTypes.func.isRequired,
   onResetClick: PropTypes.func.isRequired,
 };
 

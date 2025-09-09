@@ -9,9 +9,9 @@ const columns = [
 ];
 
 const data = [
-  { id: 1, name: "Alice", date: "2023-01-15" },
-  { id: 2, name: "Bob", date: "2023-02-10" },
-  { id: 3, name: "Charlie", date: "2023-03-05" },
+  { id: 1, name: "Alice", date: "2025-08-15" },
+  { id: 2, name: "Bob", date: "2025-08-10" },
+  { id: 3, name: "Charlie", date: "2025-07-05" },
 ];
 
 describe("DataTable", () => {
@@ -38,7 +38,6 @@ describe("DataTable", () => {
 
     expect(screen.getByText("From:")).toBeInTheDocument();
     expect(screen.getByText("To:")).toBeInTheDocument();
-    expect(screen.getByRole("button", { name: /search/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /reset/i })).toBeInTheDocument();
 
     // Check that default dates are populated (should have values, not empty)
@@ -47,38 +46,35 @@ describe("DataTable", () => {
     expect(fromDateInput.value).toBeTruthy(); // Should have a default value
     expect(toDateInput.value).toBeTruthy(); // Should have a default value
   });
-  test("applies date filter when search button is clicked", () => {
+  test("date filter applies automatically without search button", () => {
     render(<DataTable columns={columns} data={data} />);
 
     // Get date inputs using proper labels
     const fromDateInput = screen.getByLabelText("From:");
     const toDateInput = screen.getByLabelText("To:");
-    const searchButton = screen.getByRole("button", { name: /search/i });
 
-    // Set date range that should filter to only Bob's record
-    fireEvent.change(fromDateInput, { target: { value: "2023-02-01" } });
-    fireEvent.change(toDateInput, { target: { value: "2023-02-28" } });
-    fireEvent.click(searchButton);
+    // Set date range that should filter to only Bob's record (2025-08-10)
+    fireEvent.change(fromDateInput, { target: { value: "2025-08-09" } });
+    fireEvent.change(toDateInput, { target: { value: "2025-08-11" } });
 
-    // Should show Bob but not Alice or Charlie
+    // Should show Bob but not Alice or Charlie (filtering happens automatically)
     expect(screen.getByText("Bob")).toBeInTheDocument();
     expect(screen.queryByText("Alice")).not.toBeInTheDocument();
     expect(screen.queryByText("Charlie")).not.toBeInTheDocument();
   });
 
-  test("date filter only applies after search button click", () => {
+  test("date filter applies automatically when date changes", () => {
     render(<DataTable columns={columns} data={data} />);
 
     // Get date input using proper label
     const fromDateInput = screen.getByLabelText("From:");
 
-    // Set from date but don't click search
-    fireEvent.change(fromDateInput, { target: { value: "2023-02-01" } });
+    // Set from date to filter out some data
+    fireEvent.change(fromDateInput, { target: { value: "2025-08-12" } });
 
-    // All records should still be visible since search wasn't clicked
-    expect(screen.getByText("Alice")).toBeInTheDocument();
-    expect(screen.getByText("Bob")).toBeInTheDocument();
-    expect(screen.getByText("Charlie")).toBeInTheDocument();
+    // Only Bob and Alice should be visible (dates >= 2025-08-12)
+    expect(screen.getByText("Alice")).toBeInTheDocument(); // 2025-08-15
+    expect(screen.queryByText("Charlie")).not.toBeInTheDocument(); // 2025-07-05
   });
 
   test("reset button restores default date range and applies filter", () => {

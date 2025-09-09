@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import TableHeader from "./TableHeader";
 import TableBody from "./TableBody";
 import SearchBar from "./SearchBar";
@@ -39,15 +39,21 @@ const DataTable = ({ data = [], columns = [] }) => {
   const [rowsPerPage, setRowsPerPage] = useState(5);
   const [fromDate, setFromDate] = useState(defaultDates.startDate);
   const [toDate, setToDate] = useState(defaultDates.endDate);
-  const [appliedFromDate, setAppliedFromDate] = useState("");
-  const [appliedToDate, setAppliedToDate] = useState("");
+  const [appliedFromDate, setAppliedFromDate] = useState(
+    defaultDates.startDate
+  );
+  const [appliedToDate, setAppliedToDate] = useState(defaultDates.endDate);
 
-  /** Handle date filter search */
-  const handleDateSearch = () => {
+  /** Automatically apply date filters when dates change */
+  useEffect(() => {
     setAppliedFromDate(fromDate);
+    setPage(1); // Reset to first page when applying new filter
+  }, [fromDate]);
+
+  useEffect(() => {
     setAppliedToDate(toDate);
     setPage(1); // Reset to first page when applying new filter
-  };
+  }, [toDate]);
 
   /** Handle date filter reset */
   const handleDateReset = () => {
@@ -92,7 +98,6 @@ const DataTable = ({ data = [], columns = [] }) => {
           toDate={toDate}
           onFromDateChange={setFromDate}
           onToDateChange={setToDate}
-          onSearchClick={handleDateSearch}
           onResetClick={handleDateReset}
         />
       </div>
